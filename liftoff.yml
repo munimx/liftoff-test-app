@@ -1,0 +1,10 @@
+version: "1.0"
+service:
+  name: test-app
+  type: app
+  region: nyc3
+runtime:
+  instance_size: apps-s-1vcpu-0.5gb
+  port: 3000
+healthcheck:
+  path: /
