@@ -34,4 +34,4 @@ jobs:
           curl -X POST https://6639-182-185-182-246.ngrok-free.app/api/v1/webhooks/deploy-complete \
             -H "X-Liftoff-Secret: ${{ secrets.LIFTOFF_DEPLOY_SECRET }}" \
             -H "Content-Type: application/json" \
-            -d "{\"environmentId\":\"cmnnhp11u0009yt5nxwjbtj0r\",\"imageUri\":\"registry.digitalocean.com/liftoff/my-webapp/test-env-1:$IMAGE_TAG\",\"commitSha\":\"$GITHUB_SHA\"}"
+            -d "{\"environmentId\":\"cmnu5v7pg0003g51hsyutf7be\",\"imageUri\":\"registry.digitalocean.com/liftoff/my-webapp/test-env-1:$IMAGE_TAG\",\"commitSha\":\"$GITHUB_SHA\"}"
