@@ -33,6 +33,6 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           curl -X POST https://ac60-39-49-161-42.ngrok-free.app/api/v1/webhooks/deploy-complete \
-            -H "X-Liftoff-Secret: ${{ secrets.LIFTOFF_DEPLOY_SECRET_CMO1WS6T9000BBS49FWFO0W7R }}" \
+            -H "X-Liftoff-Secret: ${{ secrets.LIFTOFF_DEPLOY_SECRET_CMO1XDVNX0009H8YO92S8FAUF }}" \
             -H "Content-Type: application/json" \
-            -d "{\"environmentId\":\"cmo1ws6t9000bbs49fwfo0w7r\",\"imageUri\":\"registry.digitalocean.com/liftoff/test/production:$IMAGE_TAG\",\"commitSha\":\"$GITHUB_SHA\"}"
+            -d "{\"environmentId\":\"cmo1xdvnx0009h8yo92s8fauf\",\"imageUri\":\"registry.digitalocean.com/liftoff/test/production:$IMAGE_TAG\",\"commitSha\":\"$GITHUB_SHA\"}"
