@@ -1,0 +1,38 @@
+name: Liftoff Deploy
+
+on:
+  push:
+    branches: ['main']
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DigitalOcean Container Registry
+        run: doctl registry login --expiry-seconds 1200
+
+      - name: Build and push Docker image
+        env:
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build \
+            -f Dockerfile \
+            -t registry.digitalocean.com/liftoff/alpha-test/prod:$IMAGE_TAG \
+            .
+          docker push registry.digitalocean.com/liftoff/alpha-test/prod:$IMAGE_TAG
+
+      - name: Notify Liftoff
+        env:
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          curl -X POST https://ac60-39-49-161-42.ngrok-free.app/api/v1/webhooks/deploy-complete \
+            -H "X-Liftoff-Secret: ${{ secrets.LIFTOFF_DEPLOY_SECRET }}" \
+            -H "Content-Type: application/json" \
+            -d "{\"environmentId\":\"cmo206xze0009ckvn238t7pyc\",\"imageUri\":\"registry.digitalocean.com/liftoff/alpha-test/prod:$IMAGE_TAG\",\"commitSha\":\"$GITHUB_SHA\"}"
