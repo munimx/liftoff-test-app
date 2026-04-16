@@ -24,9 +24,9 @@ jobs:
         run: |
           docker build \
             -f Dockerfile \
-            -t registry.digitalocean.com/liftoff/alpha-test/production:$IMAGE_TAG \
+            -t registry.digitalocean.com/liftoff/mohdzez/production:$IMAGE_TAG \
             .
-          docker push registry.digitalocean.com/liftoff/alpha-test/production:$IMAGE_TAG
+          docker push registry.digitalocean.com/liftoff/mohdzez/production:$IMAGE_TAG
 
       - name: Notify Liftoff
         env:
@@ -35,4 +35,4 @@ jobs:
           curl -X POST https://ac60-39-49-161-42.ngrok-free.app/api/v1/webhooks/deploy-complete \
             -H "X-Liftoff-Secret: ${{ secrets.LIFTOFF_DEPLOY_SECRET }}" \
             -H "Content-Type: application/json" \
-            -d "{\"environmentId\":\"cmo1yaad50009yhqjtk993kb4\",\"imageUri\":\"registry.digitalocean.com/liftoff/alpha-test/production:$IMAGE_TAG\",\"commitSha\":\"$GITHUB_SHA\"}"
+            -d "{\"environmentId\":\"cmo1yrcrn004cyhqjgb37v2ch\",\"imageUri\":\"registry.digitalocean.com/liftoff/mohdzez/production:$IMAGE_TAG\",\"commitSha\":\"$GITHUB_SHA\"}"
